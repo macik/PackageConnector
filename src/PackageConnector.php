@@ -4,7 +4,7 @@
  * Utilize Composer installed packages within Cotonti
  *
  * @package PackageConnector
- * @version 0.2.1
+ * @version 0.2.2
  * @author Andrew `Macik` Matsovkin
  * @copyright Copyright (c) Cotonti Team 2010-2015
  * @license BSD
@@ -881,8 +881,16 @@ class PackageConnector implements Serializable, CustomLastErrorInterface
 	 */
 	public function getPackagesData()
 	{
-		if (!is_array($this->lockData) || !sizeof($this->lockData)) return null;
-		if ($this->lockData['packages'] && is_array($this->lockData['packages'])) return $this->lockData['packages'];
+		$packagesData = null;
+		if (is_array($this->lockData) && array_key_exists('packages', $this->lockData))
+		{
+			$packagesData = $this->lockData['packages'];
+		}
+		if (is_array($this->storedLock) && array_key_exists('packages', $this->storedLock))
+		{
+			$packagesData = $this->storedLock['packages'];
+		}
+		if (is_array($packagesData)) return $packagesData;
 		return null;
 	}
 
