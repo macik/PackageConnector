@@ -15,3 +15,7 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+# As it Composer generated and use own LF style
+composer.* binary
+composer.* diff=astextplain
